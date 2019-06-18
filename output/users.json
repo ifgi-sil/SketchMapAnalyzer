@@ -1,0 +1,42 @@
+[
+    {
+        "name": "jan",
+        "username": "jan",
+        "password": "b'$2b$12$txgpr1dQLX5ejmN1sw9ZdOPuQL0TbjDZqj9OkhCce5wTTNyqqupzO'",
+        "confirm": "b'$2b$12$KAsNfDV74jAZQp0EI2TqeuYMPP.x0pNnUui9z5hC4YkSWdbqSdOb6'",
+        "affiliation": "jan",
+        "email": "jan"
+    },
+    {
+        "name": "ali",
+        "username": "ali",
+        "password": "b'$2b$12$ZSHsEZbQ0u9l.wkBusJlY.SuLe6TcLemd7efrj3LcBElx.55M1daa'",
+        "confirm": "b'$2b$12$/evgKdZJLfHrRtzrGcP1o.058cUwPj032K657HsZpX8dN9/oWL16K'",
+        "affiliation": "ali",
+        "email": "ali"
+    },
+    {
+        "name": "joy",
+        "username": "joy",
+        "password": "b'$2b$12$4Dur3rbMRSvJMZ8e.YbJCOdvOtZdVPPbkgHxDtwQPCESlae3IYVyW'",
+        "confirm": "b'$2b$12$v38FrmilaWorhkD0wfe2aeyLY1es3Iy7B7cUtHWkTazwKxQ0QXrvq'",
+        "affiliation": "joy",
+        "email": "joy"
+    },
+    {
+        "name": "joy",
+        "username": "joy",
+        "password": "b'$2b$12$VNRhUK5hi.LdpLv7X6JWpOc9adlHPDsSe8tuhbgrCw6EbDjwA2FcG'",
+        "confirm": "b'$2b$12$vBXZ8.AgQ2Yw/BrHvnkrwen/6kcaTqzSE576t6CyEXKj48Xf2BoMi'",
+        "affiliation": "joy",
+        "email": "joy"
+    },
+    {
+        "name": "karim",
+        "username": "karim",
+        "password": "b'$2b$12$vTIcSgvAC92O9iX2JZn2ouXIwWhn3vU3g8s9hAnWG5gv66VT3Ndvm'",
+        "confirm": "b'$2b$12$9OO4H0X2g/TyTEn9e5Ja5OYW88HAbwOAwOqqjql1WgYc4.xfRcxby'",
+        "affiliation": "karim",
+        "email": "karim"
+    }
+]
