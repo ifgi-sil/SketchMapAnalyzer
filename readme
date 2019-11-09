@@ -1,0 +1,13 @@
+SketchMapAnalyzer : Evaluating Sketch Maps Qualitatively: A new Software-Supported Method
+components:
+  1. front-end in javascript and html
+  2. python-flask 
+  3. qualifier to compute spatial relations 
+  4. anlyzer: calculates accuracy of sketch maps with respect to base map
+  
+Step 1: The experimenter annotates the reference map and marks all relevant features (streets, landmarks, regions) on the map that should be investigated. That means it is possible to limit the evaluation to only those features mentioned in your experiment materials (Fig. 1). It can be specified if participants had to follow a particular route.
+Step 2: Analogously to step 1, the experimenter marks the sketched features in the sketch map. The sketch map will only be evaluated with respect to those fea-tures selected in the reference map, e.g. the participant marked in the sketch map the location of her home, which was not mentioned in the experiment material and thus is not of relevance for the evaluation.
+Step 3: The qualifier of the software automatically calculates the qualitative relations
+among all features marked in the maps. It compares all features and spatial relations
+found in the sketch maps to the features and qualitative relations in the reference map
+and calculates their completeness and correctness for each sketch map
