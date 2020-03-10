@@ -13,6 +13,9 @@ from analyser import inverses
 import json
 import os
 import bcrypt
+from settings import OUTPUT_DIR
+
+
 from passlib.hash import sha256_crypt
 #from flask_mysqldb import MySQL,MySQLdb
 
@@ -36,7 +39,7 @@ app.secret_key = "root1234code"
 # mysql  = MySQL(app)
 
 USER_ID =""
-OUTPUT_DIR = "./output"
+#OUTPUT_DIR = "./output"
 USER_PROJ_DIR = ""
 SketchMapFileName = ""
 MetricMapFileName = ""
@@ -62,6 +65,7 @@ def results():
 
 @app.route("/register", methods =["POST", "GET"])
 def register():
+    global OUTPUT_DIR
     if request.method == "POST":
         name = request.form.get("name")
         username = request.form.get("username")
@@ -74,7 +78,7 @@ def register():
         secure_confirm = bcrypt.hashpw(confirm, bcrypt.gensalt())
         #cur = mysql.connection.cursor()
 
-        userFile = os.path.join("./output", "users.json")
+        userFile = os.path.join(OUTPUT_DIR, "users.json")
         userRecord = inverses.createUserRecord(name, username, str(secure_password), str(secure_confirm), affiliation, email)
 
         a = {userRecord["username"]:userRecord}
@@ -113,6 +117,7 @@ def register():
 def login():
     global USER_ID
     global USER_PROJ_DIR
+    global OUTPUT_DIR
     if request.method == "POST":
         username= request.form.get("username")
         password = request.form.get("password").encode('utf-8')
@@ -121,7 +126,7 @@ def login():
         #cur.execute("SELECT * FROM users WHERE username=%s",(username,))
         #user = cur.fetchone()
         #cur.close()
-        userFile = os.path.join("./output", "users.json")
+        userFile = os.path.join(OUTPUT_DIR, "users.json")
         with open(userFile, 'r+') as file:
             try:
                 users = json.load(file)
@@ -137,7 +142,7 @@ def login():
                     print(user['username'])
                     print(username)
                     USER_ID = session['username']
-                    USER_PROJ_DIR = os.path.join("./output", USER_ID)
+                    USER_PROJ_DIR = os.path.join(OUTPUT_DIR, USER_ID)
                     try:
                         if not (os.path.exists(USER_PROJ_DIR)):
                             os.mkdir(USER_PROJ_DIR)
@@ -219,6 +224,7 @@ def getSketchMapID():
 def mmGeoJsonReceiver():
     global SM_QCN_PATH
     global MM_QCN_PATH
+    global OUTPUT_DIR
     #global USER_PROJ_DIR
     fileName_full = str(request.form.get('metricFileName'))
     MMGeoJsonData = request.form.get('MMGeoJsonData')
@@ -232,12 +238,9 @@ def mmGeoJsonReceiver():
 
     MetricMap_QCNS = qualify_map.main_loader(fileName, MMGeoJsonData, data_format, map_type)
     USER_ID = session['username']
-    USER_PROJ_DIR = os.path.join("./output",USER_ID)
+    USER_PROJ_DIR = os.path.join(OUTPUT_DIR,USER_ID)
     try:
         MM_QCN_PATH = os.path.join(USER_PROJ_DIR,fileName_full+".json")
-        #filepath = './output/'+str("sketchMapID")+'.json'
-        print("final file path. sm..",MM_QCN_PATH)
-
         if os.path.exists(MM_QCN_PATH):
             os.remove(MM_QCN_PATH)
         f = open(MM_QCN_PATH, "a+")
@@ -270,12 +273,9 @@ def smGeoJsonReceiver():
 
     sketchMap_QCNS = qualify_map.main_loader(fileName, SMGeoJsonData, data_format, map_type)
     USER_ID = session['username']
-    USER_PROJ_DIR = os.path.join("./output",USER_ID)
+    USER_PROJ_DIR = os.path.join(OUTPUT_DIR,USER_ID)
     try:
         SM_QCN_PATH = os.path.join(USER_PROJ_DIR,fileName_full+".json")
-        #filepath = './output/'+str("sketchMapID")+'.json'
-        print("final file path. sm..",SM_QCN_PATH)
-
         if os.path.exists(SM_QCN_PATH):
             os.remove(SM_QCN_PATH)
         f = open(SM_QCN_PATH, "a+")
@@ -297,16 +297,12 @@ def analyzeInputMap():
         #session['sketchFileName'] = sketchFileName
         USER_ID = session['username']
         #print("USER_ID",USER_ID)
-        USER_PROJ_DIR = os.path.join("./output", USER_ID)
+        USER_PROJ_DIR = os.path.join(OUTPUT_DIR, USER_ID)
 
         MM_QCN_PATH = os.path.join(USER_PROJ_DIR,metricFileName+".json")
         SM_QCN_PATH = os.path.join(USER_PROJ_DIR, sketchFileName + ".json")
-
-        print("MM_QCN_PATH",MM_QCN_PATH)
-        print("SM_QCN_PATH", SM_QCN_PATH)
         with open( MM_QCN_PATH,'r+') as mmjson:
             try:
-                #print("reading path..",os.path.join(dir_qcns,'metric_map.json'))
                 metricMapQCNs = json.load(mmjson)
             except IOError:
                 print("metric_map.json is not loading ")
@@ -589,7 +585,7 @@ def analyzeInputMap():
 
 if __name__ == '__main__':
     #app.secret_key = "root1234code"
-    app.run(debug=True)
+    app.run()
 
 """
 
